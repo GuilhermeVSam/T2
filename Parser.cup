@@ -1,0 +1,28 @@
+parser code {:
+public static void main(String[] args) throws Exception {
+ System.out.println("Digite a expressão para análise:");
+ parser p = new parser(new Yylex(System.in));
+ Object result = p.parse().value;
+ System.out.println("Resultado: " + result);
+}
+:}
+terminal PLUS, MINUS, TIMES, DIVIDE, LPAREN, RPAREN;
+terminal String ID;
+non terminal Object E, T, F;
+precedence left PLUS, MINUS;
+precedence left TIMES, DIVIDE;
+start with E;
+E ::=
+ E PLUS T {: RESULT = (int) $1 + (int) $3; :}
+ | E MINUS T {: RESULT = (int) $1 - (int) $3; :}
+ | T {: RESULT = $1; :}
+ ;
+T ::=
+ T TIMES F {: RESULT = (int) $1 * (int) $3; :}
+ | T DIVIDE F {: RESULT = (int) $1 / (int) $3; :}
+ | F {: RESULT = $1; :}
+ ;
+F ::=
+ LPAREN E RPAREN {: RESULT = $2; :}
+ | ID {: RESULT = Integer.parseInt($1); :}
+ ;
