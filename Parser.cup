@@ -16,21 +16,29 @@ ID_LIST ::= ID COMMA ID_LIST
           | ID
           ;
 
-E ::= ID PLUS ID
-      | E:e PLUS T:t {: RESULT = (int) e + (int) t; :}
-      | ID MINUS ID
+E ::= E:e PLUS T:t {: RESULT = (Integer)e + (Integer)t; :}
       | E:e MINUS T:t {: RESULT = (int) e - (int) t; :}
       | T:t {: RESULT = t; :}
       ;
 
-T ::= ID TIMES ID
-      | T:t TIMES F:f {: RESULT = (int) t * (int) f; :}
-      ID DIV ID
+T ::= T:t TIMES F:f {: RESULT = (int) t * (int) f; :}
       | T:t DIV F:f {: RESULT = (int) t / (int) f; :}
       | F:f {: RESULT = f; :}
       ;
 
 F ::= LPAREN E:e RPAREN {: RESULT = e; :}
-      | INT:integer {: RESULT = integer; :}
-      | ID:id {: RESULT = id; :}
+      | ID:id {: switch((String)id){
+            case "a" -> {
+                  RESULT = 2;
+            }
+            case "b" -> {
+                  RESULT = 3;
+            }
+            case "c" -> {
+                  RESULT = 4;
+            }
+            default -> {
+            }
+      } :}
+      | INT:integer{: RESULT = Integer.parseInt((String)integer); :}
       ;
