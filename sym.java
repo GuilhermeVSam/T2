@@ -12,10 +12,9 @@ public class sym {
   public static final int PLUS = 4;
   public static final int DIV = 7;
   public static final int ID = 3;
-  public static final int COMMA = 12;
-  public static final int ASSIGN = 11;
+  public static final int COMMA = 11;
+  public static final int ASSIGN = 10;
   public static final int error = 1;
-  public static final int SEMICOLON = 10;
   public static final int RPAREN = 9;
   public static final int TIMES = 6;
   public static final int LPAREN = 8;
@@ -30,7 +29,6 @@ public class sym {
   "DIV",
   "LPAREN",
   "RPAREN",
-  "SEMICOLON",
   "ASSIGN",
   "COMMA"
   };

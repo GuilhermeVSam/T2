@@ -1,7 +1,6 @@
 import java_cup.runtime.Symbol;
 
 %%
-
 %public
 %class Yylex
 %unicode
@@ -19,7 +18,6 @@ import java_cup.runtime.Symbol;
 %%
 
 
-\n                      {return symbol(sym.EOF);}
 \s+ {}
 [0-9]+                  {return symbol(sym.INT, yytext());}
 [a-zA-Z_][a-zA-Z_0-9]*  {return symbol(sym.ID, yytext());}
@@ -31,5 +29,4 @@ import java_cup.runtime.Symbol;
 ")"                     {return symbol(sym.RPAREN);}
 "="                     {return symbol(sym.ASSIGN); }
 ","                     {return symbol(sym.COMMA); }
-";"                     {return symbol(sym.SEMICOLON); }
 .                       {System.err.println("Caractere inválido: " + yytext());}

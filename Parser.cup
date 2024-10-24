@@ -1,5 +1,5 @@
-terminal INT, ID, PLUS, MINUS, TIMES, DIV, LPAREN, RPAREN, SEMICOLON, ASSIGN, COMMA;
-non terminal S, E, T, F, ID_LIST, ASSIGNMENT;
+terminal INT, ID, PLUS, MINUS, TIMES, DIV, LPAREN, RPAREN, ASSIGN, COMMA;
+non terminal S, E, T, F, ID_LIST;
 
 precedence left PLUS, MINUS;
 precedence left TIMES, DIV;
