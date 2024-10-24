@@ -1,28 +1,36 @@
-parser code {:
-public static void main(String[] args) throws Exception {
- System.out.println("Digite a expressão para análise:");
- parser p = new parser(new Yylex(System.in));
- Object result = p.parse().value;
- System.out.println("Resultado: " + result);
-}
-:}
-terminal PLUS, MINUS, TIMES, DIVIDE, LPAREN, RPAREN;
-terminal String ID;
-non terminal Object E, T, F;
+terminal INT, ID, PLUS, MINUS, TIMES, DIV, LPAREN, RPAREN, SEMICOLON, ASSIGN, COMMA;
+non terminal S, E, T, F, ID_LIST, ASSIGNMENT;
+
 precedence left PLUS, MINUS;
-precedence left TIMES, DIVIDE;
-start with E;
-E ::=
- E PLUS T {: RESULT = (int) $1 + (int) $3; :}
- | E MINUS T {: RESULT = (int) $1 - (int) $3; :}
- | T {: RESULT = $1; :}
- ;
-T ::=
- T TIMES F {: RESULT = (int) $1 * (int) $3; :}
- | T DIVIDE F {: RESULT = (int) $1 / (int) $3; :}
- | F {: RESULT = $1; :}
- ;
-F ::=
- LPAREN E RPAREN {: RESULT = $2; :}
- | ID {: RESULT = Integer.parseInt($1); :}
- ;
+precedence left TIMES, DIV;
+
+start with S;
+
+S ::= ID:id ASSIGN ID_LIST:id_list
+    | ID:id ASSIGN INT:integer
+    | E:e {: RESULT = e; :}
+    | {: RESULT = null; :}
+    ;
+
+ID_LIST ::= ID COMMA ID_LIST
+          | ID
+          ;
+
+E ::= ID PLUS ID
+      | E:e PLUS T:t {: RESULT = (int) e + (int) t; :}
+      | ID MINUS ID
+      | E:e MINUS T:t {: RESULT = (int) e - (int) t; :}
+      | T:t {: RESULT = t; :}
+      ;
+
+T ::= ID TIMES ID
+      | T:t TIMES F:f {: RESULT = (int) t * (int) f; :}
+      ID DIV ID
+      | T:t DIV F:f {: RESULT = (int) t / (int) f; :}
+      | F:f {: RESULT = f; :}
+      ;
+
+F ::= LPAREN E:e RPAREN {: RESULT = e; :}
+      | INT:integer {: RESULT = integer; :}
+      | ID:id {: RESULT = id; :}
+      ;
