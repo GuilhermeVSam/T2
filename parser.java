@@ -167,7 +167,7 @@ class CUP$parser$actions {
 		int id_listleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int id_listright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		Object id_list = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-
+		 RESULT = (String)id + "=" + (String)id_list; 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("S",0, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -182,7 +182,7 @@ class CUP$parser$actions {
 		int integerleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int integerright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		Object integer = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-
+		 RESULT = (String)id + "=" + integer; 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("S",0, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -212,7 +212,13 @@ class CUP$parser$actions {
           case 5: // ID_LIST ::= ID COMMA ID_LIST 
             {
               Object RESULT =null;
-
+		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
+		Object id = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
+		int id_listleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int id_listright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		Object id_list = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		 RESULT = (String)id + (String)id_list; 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("ID_LIST",4, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -221,7 +227,10 @@ class CUP$parser$actions {
           case 6: // ID_LIST ::= ID 
             {
               Object RESULT =null;
-
+		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		Object id = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		 RESULT = (String)id; 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("ID_LIST",4, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;

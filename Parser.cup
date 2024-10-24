@@ -6,14 +6,14 @@ precedence left TIMES, DIV;
 
 start with S;
 
-S ::= ID:id ASSIGN ID_LIST:id_list
-    | ID:id ASSIGN INT:integer
+S ::= ID:id ASSIGN ID_LIST:id_list {: RESULT = (String)id + "=" + (String)id_list; :}
+    | ID:id ASSIGN INT:integer {: RESULT = (String)id + "=" + integer; :}
     | E:e {: RESULT = e; :}
     | {: RESULT = null; :}
     ;
 
-ID_LIST ::= ID COMMA ID_LIST
-          | ID
+ID_LIST ::= ID:id COMMA ID_LIST:id_list {: RESULT = (String)id + (String)id_list; :}
+          | ID:id {: RESULT = (String)id; :}
           ;
 
 E ::= E:e PLUS T:t {: RESULT = (Integer)e + (Integer)t; :}
